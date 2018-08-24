@@ -5,11 +5,13 @@ class Addsong extends Component {
   render() {
     return (
       <div className="addsong">
-        <button id="home">
-            <NavLink to="/">
-                home
-            </NavLink>
-        </button>
+        <nav>
+          <button id="home">
+              <NavLink to="/">
+                  home
+              </NavLink>
+          </button>
+        </nav>
       </div>
     );
   }

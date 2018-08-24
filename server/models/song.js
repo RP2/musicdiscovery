@@ -9,10 +9,6 @@ let songSchema = new Schema({
         genre: String,
         link: String,
         status: Boolean,
-        user_id: {
-            ref: user,
-            type: Schema.types.ObjectId,
-        },
 })
 
 

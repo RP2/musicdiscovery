@@ -7,8 +7,8 @@ let playlistSchema = new Schema({
     global: Boolean,
     songs: [
         {
-            ref: song,
-            type: Schema.types.ObjectId,
+            ref: "song",
+            type: Schema.Types.ObjectId,
         }
     ],
 })

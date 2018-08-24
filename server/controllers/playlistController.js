@@ -1,15 +1,37 @@
 const db = require("../models");
+
 //get playlist
-const playlist = (req, res) => {
-    db.playlist.find({}, (err, foundPlaylist) => {
+const index = (req, res) => {
+    db.playlist.find({})
+    .populate('songs')
+    .exec((err, foundPlaylist) => {
         if (err) {
             console.log("playlist error", err);
         }
         res.status(200).json(foundPlaylist);
+    })
+};
+
+const songindex = (req, res) => {
+    db.song.find({}, (err, foundSongs) => {
+        if (err) {
+            console.log("get all songs error", err);
+        }
+        res.status(200).json(foundSongs);
     });
 };
+
+const show = (req, res) => {
+    db.playlist.findById(req.params.playlist_id, (err, foundPlaylist) => {
+        if (err){
+            console.log("Show song error", err);
+        }
+        res.status(200).json(foundPlaylist);
+    })
+}
+
 //post new song
-const savesong = (req, res) => {
+const request = (req, res) => {
     db.playlist.create(req.body, (err, newSong) => {
         if (err){
             console.log("savesong error", err);
@@ -39,7 +61,7 @@ const approve = (req, res) => {
     });
 };
 //delete songs
-const remove = (req, res) => {
+const destroy = (req, res) => {
     db.song.findByIdAndRemove({song: req.params.song_id}, (err, deleteSong) => {
         if (err){
             console.log("delete song error", err);
@@ -47,11 +69,14 @@ const remove = (req, res) => {
         res.status(200).json(deleteSong);
     });
 };
+
 //export
-module.expors = {
-    playlist: playlist,
-    savesong: savesong,
+module.exports = {
+    index,
+    songindex,
+    show,
+    request,
     pending: pending,
     approve: approve,
-    remove: remove,
+    destroy,
 }

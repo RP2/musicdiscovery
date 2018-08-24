@@ -5,11 +5,13 @@ class Pickgenre extends Component {
   render() {
     return (
       <div className="pickgenre">
-        <button id="home">
-            <NavLink to="/">
-                home
-            </NavLink>
-        </button>
+        <nav>
+          <button id="home">
+              <NavLink to="/">
+                  home
+              </NavLink>
+          </button>
+        </nav>
       </div>
     );
   }

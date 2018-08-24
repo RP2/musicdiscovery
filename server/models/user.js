@@ -8,8 +8,8 @@ let userSchema = new Schema({
     password: String,
     join_date: { type: Date, default: Date.now },
     playlist: {
-            ref: playlist,
-            type: Schema.types.ObjectId,
+            ref: "playlist",
+            type: Schema.Types.ObjectId,
         },
 })
 

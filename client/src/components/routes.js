@@ -8,15 +8,12 @@ class Routes extends Component {
   render() {
     return (
         <div className="routes">
-
-            <div className="switches">
-                <Switch>
-                <Route path="/addsong" component={addsong} />
-                <Route path="/pickgenre" component={pickgenre} />
-                <Route exact path="/" component={home} />
-                <Route exact path="/*" render={() => <div>Error 404</div>} />
-                </Switch>
-            </div>
+            <Switch>
+            <Route path="/addsong" component={addsong} />
+            <Route path="/pickgenre" component={pickgenre} />
+            <Route exact path="/" component={home} />
+            <Route exact path="/*" render={() => <div>Error 404</div>} />
+            </Switch>
         </div>
     );
   }

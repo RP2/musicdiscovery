@@ -5,13 +5,13 @@ mongoose.connect(
   { useNewUrlParser: true }
 );
 
-let user = require("./user.js");
-let playlist = require("./playlist.js");
 let song = require("./song.js");
+let playlist = require("./playlist.js");
+let user = require("./user.js");
 
 
 module.exports = {
-  user: user,
-  playlist: playlist,
   song: song,
+  playlist: playlist,
+  user: user,
 };
