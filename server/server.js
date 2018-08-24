@@ -27,7 +27,7 @@ app.post("/api/users/signup", controllers.user.signup);
 //user profile routes
 app.get("/api/users/:user_id", controllers.user.profile)
 app.put("/api/users/:user_id", controllers.user.edit);
-app.delete("/api/users/:user_id", controllers.user.delete);
+app.delete("/api/users/:user_id", controllers.user.remove);
 //user playlist routes
 app.get("/api/user/:user_id/playlist", controllers.user.playlist);
 app.post("/api/users/:user_id/playlist", controllers.user.savesong);
