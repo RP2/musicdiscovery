@@ -6,7 +6,7 @@ class Home extends Component {
 
   state = {
     queue: [],
-    index: 1,
+    index: null,
   }
 
   componentDidMount() {
@@ -29,19 +29,29 @@ class Home extends Component {
       })
       this.setState({ queue: temp })
     });
+    //randomly sets initial song, change number based on number of songs
+    this.state.index = Math.floor(Math.random() * 3);
   }
 
 
-  playPrev = () => {
-    if (this.state.index < 0){
+  playPrev = (event) => {
+    if (this.state.index <= 0){
       this.setState({index: this.state.queue.length-1})
-    }
+    } else (
+      this.setState({
+        index: this.state.index - 1
+      })
+    ) 
   }
 
-  playNext = () => {
-    if (this.state.index > this.state.queue.length){
+  playNext = (event) => {
+    if (this.state.index >= this.state.queue.length-1){
       this.setState({index: 0})
-    }
+    } else (
+      this.setState({
+        index: this.state.index + 1
+      })
+    )
   }
 
   // onKeydown = (event) => {
@@ -69,10 +79,10 @@ class Home extends Component {
                   add a song
               </NavLink>
           </button>
-          <button>
+          <button onClick={this.playPrev}>
             prev
           </button>
-          <button>
+          <button onClick={this.playNext}>
             next
           </button>
         </nav>
