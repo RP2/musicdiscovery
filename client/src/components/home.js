@@ -6,6 +6,7 @@ class Home extends Component {
 
   state = {
     queue: [],
+    index: 1,
   }
 
   componentDidMount() {
@@ -24,17 +25,36 @@ class Home extends Component {
         } else {temp.push(urlEnd);}
         
         console.log(temp)
+        return songList;
       })
       this.setState({ queue: temp })
     });
-    // let link = "W-gN-rUxtio"
-    // this.setState({
-    //   link: link,
-    // })
   }
 
 
+  playPrev = () => {
+    if (this.state.index < 0){
+      this.setState({index: this.state.queue.length-1})
+    }
+  }
 
+  playNext = () => {
+    if (this.state.index > this.state.queue.length){
+      this.setState({index: 0})
+    }
+  }
+
+  // onKeydown = (event) => {
+  //   switch (event) {
+  //     case 37:
+  //       playPrev();
+  //       break;
+  //     case 39:
+  //       playNext();
+  //       break;
+  //   }
+  // }
+  
   render() {
     return (
       <div className="home">
@@ -56,7 +76,7 @@ class Home extends Component {
             next
           </button>
         </nav>
-        <iframe src={`https://www.youtube.com/embed/${this.state.queue[0]}?rel=0&amp;controls=0&amp;showinfo=0&amp;autoplay=1`} frameBorder="0" allow="autoplay; encrypted-media" allowFullScreen>
+        <iframe title="music" src={`https://www.youtube.com/embed/${this.state.queue[this.state.index]}?rel=0&amp;controls=0&amp;showinfo=0&amp;autoplay=1`} frameBorder="0" allow="autoplay; encrypted-media" allowFullScreen>
         </iframe>
       </div>
     );

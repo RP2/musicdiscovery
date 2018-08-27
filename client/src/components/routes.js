@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Switch, Route, NavLink, withRouter } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import home from "./home.js";
 import addsong from "./addsong.js";
 import pickgenre from "./pickgenre.js";
