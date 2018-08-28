@@ -6,10 +6,7 @@ body {
   font-size: 16px;
   font-family: 'Nunito', sans-serif;
   background: black;
-}
-
-Nav{
-  position: absolute;
+  color: white;
 }
 
 iframe {
@@ -27,4 +24,34 @@ button, button a {
   text-decoration: none;
   cursor: pointer;
   outline: 0;
+}
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: white;
+  opacity: 1; /* Firefox */
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: white;
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+  color: white;
+}
+
+#requestForm{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 10em;
+}
+#requestForm input {
+  padding: 1em;
+  margin-top: .5em;
+  margin-bottom: .5em;
+  border: none;
+  border-bottom: white solid 1px;
+  color: white;
+  outline: 0;
+  background-color: transparent;
 }

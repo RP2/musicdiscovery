@@ -8,7 +8,7 @@ class Pickgenre extends Component {
         <nav>
           <button id="home">
               <NavLink to="/">
-              <i class="fas fa-home"></i>
+              <i className="fas fa-home"></i>
               </NavLink>
           </button>
         </nav>

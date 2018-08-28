@@ -10,10 +10,9 @@ class Home extends Component {
   }
 //onMount, gets playlist from backend and splices the urls
   componentDidMount() {
-    
     Model.getPlaylist().then(res => {
       let temp = [];
-      let songList = res.data[0].songs.map(song => {
+      let songList = res.data.map(song => {
         let url = song.link;
         let urlSections = url.split('/');
         let urlEnd = urlSections[urlSections.length -1];
@@ -59,19 +58,19 @@ class Home extends Component {
         <nav>
           <button className="homeButton" id="pickgenre">
               <NavLink to="/pickgenre">
-              <i class="fas fa-filter"></i>
+              <i className="fas fa-filter"></i>
               </NavLink>
           </button>
           <button className="homeButton" id="addsong">
               <NavLink to="/addsong">
-              <i class="fas fa-plus"></i>
+              <i className="fas fa-plus"></i>
               </NavLink>
           </button>
           <button className="homeButton" onClick={this.playPrev}>
-          <i class="fas fa-backward"></i>
+          <i className="fas fa-backward"></i>
           </button>
           <button className="homeButton" onClick={this.playNext}>
-          <i class="fas fa-forward"></i>
+          <i className="fas fa-forward"></i>
           </button>
         </nav>
         <iframe title="music" src={`https://www.youtube.com/embed/${this.state.queue[this.state.index]}?wmode=opaque&rel=0&amp;controls=0&amp;showinfo=0&amp;autoplay=1`} frameBorder="0" allow="autoplay; encrypted-media" allowFullScreen>

@@ -8,7 +8,7 @@ let songSchema = new Schema({
         artist: String,
         genre: String,
         link: String,
-        status: Boolean,
+        status: {type: Boolean, default: false},
 })
 
 

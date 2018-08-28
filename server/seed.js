@@ -47,7 +47,7 @@ db.song.remove({}, (err, removedSongs) => {
             console.log('Playlist removed successfully!')
             if (err) throw err;
             console.log('Creating new Playlist...')
-            let newPlaylist = new db.playlist(play_list);
+            let newPlaylist = new db.playlist({global: true});
             // if (err) throw err;
             console.log('New Playlist created successfully!');
             createdSongs.forEach(song => {

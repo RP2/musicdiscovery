@@ -2,13 +2,17 @@ const db = require("../models");
 
 //get playlist
 const index = (req, res) => {
-    db.playlist.find({})
+    db.playlist.findOne({global: true})
     .populate('songs')
     .exec((err, foundPlaylist) => {
         if (err) {
             console.log("playlist error", err);
         }
-        res.status(200).json(foundPlaylist);
+        console.log(foundPlaylist)
+        let songs = foundPlaylist.songs.filter(song => {
+            return song.status === true
+        })
+        res.status(200).json(songs);
     })
 };
 
@@ -32,12 +36,24 @@ const show = (req, res) => {
 
 //post new song
 const request = (req, res) => {
-    db.playlist.create(req.body, (err, newSong) => {
-        if (err){
-            console.log("savesong error", err);
+    db.song.findOne({title: req.body.title}, (err, foundSong) => {
+        if (err){console.log(err)}
+        if (foundSong){
+            console.log("song already exists")
+        } else {
+            db.song.create(req.body, (err, newSong) => {
+                if (err){
+                    console.log("savesong error", err);
+                }
+                db.playlist.findOne({global: true}, (err, foundPlaylist) => {
+                    console.log(foundPlaylist)
+                    foundPlaylist.songs.push(newSong._id);
+                    foundPlaylist.save();
+                });
+                res.status(200).json(newSong);
+            });
         }
-        res.status(200).json(newSong);
-    });
+    })
 };
 //get pending songs
 const pending = (req, res) => {
