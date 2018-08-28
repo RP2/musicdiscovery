@@ -35,14 +35,19 @@ nav {
   justify-content: center;
 }
 
-button, button a {
+button, a {
   font-size: 1em;
+  padding: 0;
   background-color: transparent;
   border: none;
   color: white;
   text-decoration: none;
   cursor: pointer;
   outline: 0;
+}
+
+button {
+  margin: 1em;
 }
 
 ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
