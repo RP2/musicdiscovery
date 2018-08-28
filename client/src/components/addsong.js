@@ -8,7 +8,7 @@ class Addsong extends Component {
         <nav>
           <button id="home">
               <NavLink to="/">
-                  home
+              <i class="fas fa-home"></i>
               </NavLink>
           </button>
         </nav>

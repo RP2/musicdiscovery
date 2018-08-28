@@ -8,8 +8,9 @@ class Home extends Component {
     queue: [],
     index: null,
   }
-
+//onMount, gets playlist from backend and splices the urls
   componentDidMount() {
+    
     Model.getPlaylist().then(res => {
       let temp = [];
       let songList = res.data[0].songs.map(song => {
@@ -19,21 +20,20 @@ class Home extends Component {
         let equalElement = urlEnd.includes('=')
         if (equalElement) {
           let equallink = urlEnd.split('=')
-          console.log(equallink)
           let link = equallink[equallink.length -1];
           temp.push(link);
         } else {temp.push(urlEnd);}
-        
-        console.log(temp)
         return songList;
       })
-      this.setState({ queue: temp })
-    });
-    //randomly sets initial song, change number based on number of songs
-    this.state.index = Math.floor(Math.random() * 3);
+      //randomly sets initial song, change number based on number of songs
+      let queueLength = Math.floor(Math.random() * temp.length)
+      this.setState({ 
+        queue: temp,
+        index: queueLength, 
+      })
+    }); 
   }
-
-
+// incriments current index in playlist +1
   playPrev = (event) => {
     if (this.state.index <= 0){
       this.setState({index: this.state.queue.length-1})
@@ -43,7 +43,7 @@ class Home extends Component {
       })
     ) 
   }
-
+// incriments current index in playlist -1
   playNext = (event) => {
     if (this.state.index >= this.state.queue.length-1){
       this.setState({index: 0})
@@ -53,40 +53,28 @@ class Home extends Component {
       })
     )
   }
-
-  // onKeydown = (event) => {
-  //   switch (event) {
-  //     case 37:
-  //       playPrev();
-  //       break;
-  //     case 39:
-  //       playNext();
-  //       break;
-  //   }
-  // }
-  
   render() {
     return (
       <div className="home">
         <nav>
-          <button id="pickgenre">
+          <button className="homeButton" id="pickgenre">
               <NavLink to="/pickgenre">
-                  pick a genre
+              <i class="fas fa-filter"></i>
               </NavLink>
           </button>
-          <button id="addsong">
+          <button className="homeButton" id="addsong">
               <NavLink to="/addsong">
-                  add a song
+              <i class="fas fa-plus"></i>
               </NavLink>
           </button>
-          <button onClick={this.playPrev}>
-            prev
+          <button className="homeButton" onClick={this.playPrev}>
+          <i class="fas fa-backward"></i>
           </button>
-          <button onClick={this.playNext}>
-            next
+          <button className="homeButton" onClick={this.playNext}>
+          <i class="fas fa-forward"></i>
           </button>
         </nav>
-        <iframe title="music" src={`https://www.youtube.com/embed/${this.state.queue[this.state.index]}?rel=0&amp;controls=0&amp;showinfo=0&amp;autoplay=1`} frameBorder="0" allow="autoplay; encrypted-media" allowFullScreen>
+        <iframe title="music" src={`https://www.youtube.com/embed/${this.state.queue[this.state.index]}?wmode=opaque&rel=0&amp;controls=0&amp;showinfo=0&amp;autoplay=1`} frameBorder="0" allow="autoplay; encrypted-media" allowFullScreen>
         </iframe>
       </div>
     );
