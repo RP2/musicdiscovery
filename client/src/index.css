@@ -9,11 +9,30 @@ body {
   color: white;
 }
 
-iframe {
+nav {
+  position: absolute;
+}
+
+#homePlayer {
   height: 100vh;
   width: 100vw;
   position: absolute;
   z-index: -1;
+}
+
+#genreDiv {
+  display: flex;
+  justify-content: center;
+}
+
+#genrePlayer {
+  width: 50vw;
+  height: 50vh;
+}
+
+#genreButtons {
+  display: flex;
+  justify-content: center;
 }
 
 button, button a {
@@ -43,8 +62,11 @@ button, button a {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin: 10em;
+  padding-top: 10em;
+  padding-left: 10em;
+  padding-right: 10em;
 }
+
 #requestForm input {
   padding: 1em;
   margin-top: .5em;
@@ -55,3 +77,4 @@ button, button a {
   outline: 0;
   background-color: transparent;
 }
+

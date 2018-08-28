@@ -22,6 +22,13 @@ let song_list = [
         link: "https://www.youtube.com/watch?v=3bNITQR4Uso",
         status: false,
     },
+    {
+        title: "Frog's Theme",
+        artist: "Chrono Trigger",
+        genre: "Game",
+        link: "https://youtu.be/9YsAyO9oW00",
+        status: true,
+    },
 ]
 
 let play_list = [

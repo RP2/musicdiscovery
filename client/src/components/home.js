@@ -73,7 +73,7 @@ class Home extends Component {
           <i className="fas fa-forward"></i>
           </button>
         </nav>
-        <iframe title="music" src={`https://www.youtube.com/embed/${this.state.queue[this.state.index]}?wmode=opaque&rel=0&amp;controls=0&amp;showinfo=0&amp;autoplay=1`} frameBorder="0" allow="autoplay; encrypted-media" allowFullScreen>
+        <iframe id="homePlayer" title="music" src={`https://www.youtube.com/embed/${this.state.queue[this.state.index]}?wmode=opaque&rel=0&amp;controls=0&amp;showinfo=0&amp;autoplay=1`} frameBorder="0" allow="autoplay; encrypted-media" allowFullScreen>
         </iframe>
       </div>
     );

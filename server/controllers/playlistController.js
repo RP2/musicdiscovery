@@ -25,6 +25,22 @@ const songindex = (req, res) => {
     });
 };
 
+const filter = (req, res) => {
+    console.log(req.params.genre)
+    db.playlist.findOne({global: true})
+        .populate('songs')
+        .exec((err, foundPlaylist) => {
+            if (err) {
+                console.log("playlist error", err);
+            }
+            console.log(foundPlaylist)
+            let songs = foundPlaylist.songs.filter(song => {
+                return song.genre === req.params.genre
+            })
+            res.status(200).json(songs);
+        })
+}
+
 const show = (req, res) => {
     db.playlist.findById(req.params.playlist_id, (err, foundPlaylist) => {
         if (err){
@@ -90,6 +106,7 @@ const destroy = (req, res) => {
 module.exports = {
     index,
     songindex,
+    filter,
     show,
     request,
     pending: pending,

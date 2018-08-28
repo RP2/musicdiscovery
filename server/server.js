@@ -17,6 +17,7 @@ const controllers = require("./controllers");
 //global routes
 app.get("/api/playlist", controllers.playlist.index);
 app.post("/api/playlist", controllers.playlist.request);
+app.get("/api/playlist/songs/:genre", controllers.playlist.filter);
 app.get("/api/playlist/:playlist_id", controllers.playlist.show);
 app.get("/api/songs", controllers.playlist.songindex);
 //admin routes
