@@ -88,6 +88,11 @@ class Home extends Component {
           <button className="homeButton" onClick={this.playNext}>
           <i className="fas fa-forward"></i>
           </button>
+          <button className="homeButton" id="addsong">
+              <NavLink to="/login">
+                <i className="fas fa-user"></i>
+              </NavLink>
+          </button>
         </nav>
         <div id="songDetail">
           <p>{this.state.title[this.state.index]}</p>

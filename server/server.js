@@ -25,8 +25,9 @@ app.get("/api/playlist/pending", controllers.playlist.pending);
 app.put("/api/playlist/pending/:song_id", controllers.playlist.approve);
 app.delete("/api/playlist/pending/:song_id", controllers.playlist.destroy);
 //user account routes
-// app.post("/api/users/login", controllers.user.login);
-// app.post("/api/users/signup", controllers.user.signup);
+app.get("/api/users", controllers.user.index)
+app.post("/api/users/login", controllers.user.login);
+app.post("/api/users/signup", controllers.user.signup);
 // //user profile routes
 // app.get("/api/users/:user_id", controllers.user.profile)
 // app.put("/api/users/:user_id", controllers.user.edit);

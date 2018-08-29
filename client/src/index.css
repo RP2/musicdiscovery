@@ -15,6 +15,11 @@ nav {
 
 p {
   margin: 0;
+  text-shadow: 0px 0px 1px black;
+}
+
+i {
+  text-shadow: 0px 0px 1px black;
 }
 
 #homePlayer {
@@ -74,7 +79,7 @@ button {
   color: white;
 }
 
-#requestForm{
+.Form{
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -83,7 +88,7 @@ button {
   padding-right: 10em;
 }
 
-#requestForm input {
+.Form input {
   padding: 1em;
   margin-top: .5em;
   margin-bottom: .5em;

@@ -73,13 +73,13 @@ class Pickgenre extends Component {
     return (
       <div className="pickgenre">
         <nav>
-          <button id="home">
+          <button className="homeButton">
               <NavLink to="/">
               <i className="fas fa-home"></i>
               </NavLink>
           </button>
         </nav>
-        <form id="requestForm" onSubmit={this.submit}>
+        <form className="Form" onSubmit={this.submit}>
           <h2>Find A Genre</h2>
           <input type="text" ref="genre" placeholder="Genre" required="true"/>
           <input type="submit" value="Submit" style={{display: 'none'}}/>

@@ -40,13 +40,13 @@ class Addsong extends Component {
     return (
       <div className="addsong">
         <nav>
-          <button id="home">
+          <button className="homeButton">
               <NavLink to="/">
               <i className="fas fa-home"></i>
               </NavLink>
           </button>
         </nav>
-        <form id="requestForm" onSubmit={this.submit}>
+        <form className="Form" onSubmit={this.submit}>
           <h2>Request A Song</h2>
           <input type="text" ref="title" required="true" placeholder="Title"/>
           <input type="text" ref="artist" required="true" placeholder="Artist" />
