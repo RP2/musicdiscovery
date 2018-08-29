@@ -8,25 +8,29 @@ class Signup extends Component {
         notification: '',
     }
 
-  onSubmit = event => {
+  onSubmit = (event) => {
     event.preventDefault();
     if (this.refs.password.value === this.refs.confirmpassword.value) {
       Model.signup(this.refs.email.value, this.refs.password.value)
         .then(res => {
           if (res.status === 404) {
-            console.log("request failed");
+            this.setState({
+              notification: "request failed"
+            })
+          } else {
+            localStorage.setItem("userId", res.data._id);
+            this.props.history.push("/profile");
           }
-          localStorage.setItem("userId", res.data._id);
-          this.props.history.push("/profile");
         })
         .catch(error => {
           this.setState({
-              notification: "user already exists!"
+              notification: `${error}, user already exists!`
           })
-          console.log(error);
         });
     } else {
-      console.log("passwords do not match");
+      this.setState({
+        notification: "passwords do not match!"
+      })
     }
   };
 
@@ -42,7 +46,7 @@ class Signup extends Component {
         </nav>
         <form onSubmit={this.onSubmit} className="Form">
             <h2>Signup</h2>
-            <input type="email" ref="email" placeholder="Username" required="true" />
+            <input type="email" ref="email" placeholder="Email" required="true" />
             <input type="password" ref="password" placeholder="Password" required="true" />
             <input type="password" ref="confirmpassword" placeholder="Confirm Password" required="true" />
             <input type="submit" value="Submit" style={{display: 'none'}} />

@@ -20,7 +20,7 @@ function signup(req, res) {
         console.log("User Already Exists:", foundUser);
         res.status(400).send("User Already Exists");
       } else {
-        db.User.create(req.body, function(err, user) {
+        db.user.create(req.body, function(err, user) {
           if (err) {
             console.log("error", err);
           }
@@ -33,7 +33,7 @@ function signup(req, res) {
   //login function
 function login(req, res) {
     db.user.findOne(
-      { username: req.body.email, password: req.body.password },
+      { email: req.body.email, password: req.body.password },
       function(err, foundUser) {
         if (err) {
           return err;
