@@ -5,6 +5,8 @@ import Model from "../models/getPlaylist.js";
 class Home extends Component {
 
   state = {
+    title: [],
+    artist: [],
     queue: [],
     index: null,
   }
@@ -12,7 +14,19 @@ class Home extends Component {
   componentDidMount() {
     Model.getPlaylist().then(res => {
       let temp = [];
-      let songList = res.data.map(song => {
+      let titleList = []
+      let artistList = []
+      let titles = res.data.map(song => { //gets title data
+        let title = song.title;
+        titleList.push(title)
+        return titles; //remove warning
+      })
+      let artists = res.data.map(song => { //gets artist data
+        let artist = song.artist;
+        artistList.push(artist)
+        return artists; //remove warning
+      })
+      let songList = res.data.map(song => { //split url to put in iframe
         let url = song.link;
         let urlSections = url.split('/');
         let urlEnd = urlSections[urlSections.length -1];
@@ -22,11 +36,13 @@ class Home extends Component {
           let link = equallink[equallink.length -1];
           temp.push(link);
         } else {temp.push(urlEnd);}
-        return songList;
+        return songList; //remove warnings
       })
       //randomly sets initial song, change number based on number of songs
       let queueLength = Math.floor(Math.random() * temp.length)
-      this.setState({ 
+      this.setState({
+        title: titleList,
+        artist: artistList,
         queue: temp,
         index: queueLength, 
       })
@@ -73,6 +89,10 @@ class Home extends Component {
           <i className="fas fa-forward"></i>
           </button>
         </nav>
+        <div id="songDetail">
+          <p>{this.state.title[this.state.index]}</p>
+          <p>{this.state.artist[this.state.index]}</p>
+        </div>
         <iframe id="homePlayer" title="music" src={`https://www.youtube.com/embed/${this.state.queue[this.state.index]}?wmode=opaque&rel=0&amp;controls=0&amp;showinfo=0&amp;autoplay=1`} frameBorder="0" allow="autoplay; encrypted-media" allowFullScreen>
         </iframe>
       </div>

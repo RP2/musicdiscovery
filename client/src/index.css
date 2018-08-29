@@ -13,11 +13,22 @@ nav {
   position: absolute;
 }
 
+p {
+  margin: 0;
+}
+
 #homePlayer {
   height: 100vh;
   width: 100vw;
   position: absolute;
   z-index: -1;
+}
+
+#songDetail {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: .5em;
 }
 
 #genreDiv {
