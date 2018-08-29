@@ -29,6 +29,13 @@ let song_list = [
         link: "https://youtu.be/9YsAyO9oW00",
         status: true,
     },
+    {
+        title: "Havana",
+        artist: "Camila Cabello",
+        genre: "Hip-hop",
+        link: "https://youtu.be/HCjNJDNzw8Y",
+        status: true,
+    },
 ]
 
 let play_list = [

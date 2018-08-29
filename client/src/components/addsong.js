@@ -11,15 +11,17 @@ class Addsong extends Component {
   submit = (event) => {
     event.preventDefault()
     let link = this.refs.link.value; //checks link
-    if (link.includes('https://youtu.be/' || 'https://www.youtube.com/watch?v=')) {
+    if (link.includes('https://youtu.be/') || link.includes('https://www.youtube.com/watch?v=')) {
       console.log(link)
       this.setState({
         notification: null
       }) //send form data
+      let genreVal = this.refs.genre.value
+      let genre = genreVal.charAt(0).toUpperCase() + genreVal.substring(1).toLowerCase();
       Model.request({
         title: this.refs.title.value,
         artist: this.refs.artist.value,
-        genre: this.refs.genre.value,
+        genre: genre,
         link: this.refs.link.value
       }).then(res => {
         if (res.status === 404) {
