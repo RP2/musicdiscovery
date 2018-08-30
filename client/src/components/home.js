@@ -77,12 +77,13 @@ class Home extends Component {
     )
   }
 
-  setAuth = (userId) => {
-    this.setState({
-      auth: true,
-      userId: userId,
-    });
-  };
+  saveSong = (event) => {
+    if (localStorage.getItem("userId") != null) {
+      
+    } else {
+      return this.props.history.push('/login');
+    }
+  }
 
   render() {
     return (
@@ -117,9 +118,7 @@ class Home extends Component {
           </button>
         </nav>
         <div id="songDetail">
-          <NavLink to="/login">
-            <i className="fas fa-save"></i>
-          </NavLink>
+            <i className="fas fa-save" onClick={this.saveSong}></i>
           <p>{this.state.title[this.state.index]}</p>
           <p>{this.state.artist[this.state.index]}</p>
         </div>

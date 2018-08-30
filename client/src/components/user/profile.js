@@ -7,6 +7,7 @@ class Profile extends Component {
   state = {
     email: '',
     join_date: '',
+    clearance: false,
   }
 
   componentDidMount(){
@@ -28,6 +29,7 @@ class Profile extends Component {
     this.setState({
       email: res.data.email,
       join_date: date[0],
+      clearance: res.data.clearance,
     })
   })
   
@@ -65,6 +67,13 @@ class Profile extends Component {
               <i className="fas fa-sign-out-alt" onClick={this.logout}></i>
             </NavLink>
           </button>
+          {this.state.clearance ?(
+            <button className="homeButton">
+            <NavLink to="/admin">
+            <i className="fas fa-check"></i>
+            </NavLink>
+          </button>
+          ):('')}
           <p>Welcome back <strong>{this.state.email}</strong></p>
           <p>member since: {this.state.join_date}</p>
         </nav>

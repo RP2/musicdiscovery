@@ -1,9 +1,9 @@
 const db = require("../models");
 
 // GET /api/users
-function index(req, res) {
+const index = (req, res) => {
     // access database and pull out all users
-    db.user.find({}, function(err, allUsers) {
+    db.user.find({},(err, allUsers) => {
       if (err) {
         console.log("error", err);
       }
@@ -12,7 +12,7 @@ function index(req, res) {
   }
 
 // POST /api/users/si
-function signup(req, res) {
+const signup = (req, res) => {
     db.user.findOne({ email: req.body.email }, (err, foundUser) => {
       if (err) {
         console.log(err);
@@ -20,21 +20,24 @@ function signup(req, res) {
         console.log("User Already Exists:", foundUser);
         res.status(400).send("User Already Exists");
       } else {
-        db.user.create(req.body, function(err, user) {
+        let newUser = new db.user(req.body);
+        db.playlist.create({global: false}, (err, userPlaylist) => {
           if (err) {
-            console.log("error", err);
+            throw err
           }
-          res.status(200).json(user);
-        });
-      }
+          newUser.playlist = userPlaylist._id;
+          newUser.save()
+        })
+        res.status(200).json(newUser);
+        };
     });
   }
 
   //login function
-function login(req, res) {
+const login = (req, res) => {
     db.user.findOne(
       { email: req.body.email, password: req.body.password },
-      function(err, foundUser) {
+      (err, foundUser) => {
         if (err) {
           return err;
         }
@@ -50,9 +53,9 @@ function login(req, res) {
   }
 
   // user profile
-function profile(req, res) {
+const profile = (req, res) => {
   console.log(req.params)
-  db.user.findOne({ _id: req.params.user_id }, function(err, foundUser) {
+  db.user.findOne({ _id: req.params.user_id },(err, foundUser) => {
     if (err) {
       console.log(err);
     }
@@ -60,9 +63,42 @@ function profile(req, res) {
   });
 }
 
+const playlist = (req, res) => {
+  db.user.findOne({ _id: req.params.user_id }, (err, foundUser) => {
+    if (err) {
+      throw err
+    }
+    db.playlist.findById(foundUser.playlist)
+      .populate('songs')
+      .exec((err, allSongs) => {
+        if (err) throw err;
+        res.json(allSongs)
+      })
+  })
+}
+
+const saveSong = (req, res) => {
+  db.user.findOne({_id: req.params.user_id}, (err, foundUser) =>{
+    if (err) {
+      return err;
+    }
+    db.playlist.findOne({_id: foundUser.playlist}, (err, foundPlaylist) => {
+      if (err) {
+        return err;
+      }
+      foundPlaylist.songs.push(req.body._id);
+      foundPlaylist.save();
+    });
+    res.status(200).json(foundUser.playlist);
+  });
+}
+
+
   module.exports = {
       index,
       signup,
       login,
       profile,
+      playlist,
+      saveSong,
   }

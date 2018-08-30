@@ -33,8 +33,8 @@ app.get("/api/users/:user_id", controllers.user.profile)
 // app.put("/api/users/:user_id", controllers.user.edit);
 // app.delete("/api/users/:user_id", controllers.user.remove);
 // //user playlist routes
-// app.get("/api/user/:user_id/playlist", controllers.user.playlist);
-// app.post("/api/users/:user_id/playlist", controllers.user.savesong);
+app.get("/api/users/:user_id/playlist", controllers.user.playlist);
+app.post("/api/users/:user_id/playlist", controllers.user.saveSong);
 
 // listen on port 4000
 app.listen(process.env.PORT || 4000, () => {
