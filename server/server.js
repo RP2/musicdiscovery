@@ -29,7 +29,7 @@ app.get("/api/users", controllers.user.index)
 app.post("/api/users/login", controllers.user.login);
 app.post("/api/users/signup", controllers.user.signup);
 // //user profile routes
-// app.get("/api/users/:user_id", controllers.user.profile)
+app.get("/api/users/:user_id", controllers.user.profile)
 // app.put("/api/users/:user_id", controllers.user.edit);
 // app.delete("/api/users/:user_id", controllers.user.remove);
 // //user playlist routes

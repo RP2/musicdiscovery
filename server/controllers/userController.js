@@ -49,8 +49,20 @@ function login(req, res) {
     );
   }
 
+  // user profile
+function profile(req, res) {
+  console.log(req.params)
+  db.user.findOne({ _id: req.params.user_id }, function(err, foundUser) {
+    if (err) {
+      console.log(err);
+    }
+    res.status(200).json(foundUser);
+  });
+}
+
   module.exports = {
       index,
       signup,
       login,
+      profile,
   }

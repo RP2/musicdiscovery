@@ -46,6 +46,7 @@ let play_list = [
 
 let user = [
     {
+        clearance: true,
         email: 'test',
         password: 'test',
     }
