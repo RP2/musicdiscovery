@@ -19,6 +19,11 @@ class userModels {
         )
     return request
     }
+
+    static profile(userId){
+        let request = axios.get(`http://localhost:4000/api/users/${userId}`)
+        return request
+    }
 }
 
 

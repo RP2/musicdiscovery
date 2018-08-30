@@ -5,6 +5,8 @@ import Model from "../models/getPlaylist.js";
 class Home extends Component {
 
   state = {
+    auth: false,
+    userId: null,
     title: [],
     artist: [],
     queue: [],
@@ -47,6 +49,12 @@ class Home extends Component {
         index: queueLength, 
       })
     }); 
+    if (localStorage.getItem("userId") != null) {
+      this.setState({
+        auth: true,
+        userId: localStorage.getItem("userId")
+      });
+    }
   }
 // incriments current index in playlist +1
   playPrev = (event) => {
@@ -68,6 +76,14 @@ class Home extends Component {
       })
     )
   }
+
+  setAuth = (userId) => {
+    this.setState({
+      auth: true,
+      userId: userId,
+    });
+  };
+
   render() {
     return (
       <div className="home">
@@ -89,9 +105,15 @@ class Home extends Component {
           <i className="fas fa-forward"></i>
           </button>
           <button className="homeButton" id="addsong">
+            {this.state.auth ? (
+              <NavLink to="/profile">
+                <i className="fas fa-user"></i>
+              </NavLink>
+            ) : (
               <NavLink to="/login">
                 <i className="fas fa-user"></i>
               </NavLink>
+            )}
           </button>
         </nav>
         <div id="songDetail">

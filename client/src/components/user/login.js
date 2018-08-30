@@ -8,20 +8,24 @@ class Login extends Component {
     notification: '',
   }
 
+  componentDidMount() {
+    if (localStorage.getItem("userId") != null) {
+      return this.props.history.push("/profile");
+    }
+  }
+
   onSubmit = (event) => {
     event.preventDefault();
     Model.login(this.refs.email.value, this.refs.password.value).then(
       res => {
-        if (res.status === 404) {
-          this.setState({
-            notification: "request failed"
-          })
-        } else{
           localStorage.setItem("userId", res.data._id);
           this.props.history.push("/profile");
-        }
       }
-    );
+    ).catch(error => {
+      this.setState({
+          notification: `${error}, something was incorrect.`
+      })
+    });
   };
 
   render() {

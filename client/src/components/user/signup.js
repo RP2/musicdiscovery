@@ -8,6 +8,12 @@ class Signup extends Component {
         notification: '',
     }
 
+    componentDidMount() {
+      if (localStorage.getItem("userId") != null) {
+        return this.props.history.push("/profile");
+      }
+    }
+
   onSubmit = (event) => {
     event.preventDefault();
     if (this.refs.password.value === this.refs.confirmpassword.value) {
