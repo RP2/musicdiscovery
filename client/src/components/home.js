@@ -117,6 +117,9 @@ class Home extends Component {
           </button>
         </nav>
         <div id="songDetail">
+          <NavLink to="/login">
+            <i className="fas fa-save"></i>
+          </NavLink>
           <p>{this.state.title[this.state.index]}</p>
           <p>{this.state.artist[this.state.index]}</p>
         </div>
