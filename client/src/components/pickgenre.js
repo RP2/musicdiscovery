@@ -2,17 +2,29 @@ import React, { Component } from 'react';
 import { NavLink } from "react-router-dom";
 import YouTube from 'react-youtube';
 import Model from "../models/filterSongs.js";
+import userModel from "../models/userModels.js";
 
 class Pickgenre extends Component {
 
   state = {
     queue: [],
+    userId: null,
     index: null,
     title: [],
     artist: [],
+    song_id: [],
     display: 'none',
     displayBlock: 'none',
     notification: '',
+  }
+
+  componentDidMount = () => {
+    if (localStorage.getItem("userId") != null) {
+      this.setState({
+        auth: true,
+        userId: localStorage.getItem("userId")
+      });
+    }
   }
 
   submit = (event) => {
@@ -29,10 +41,10 @@ class Pickgenre extends Component {
           notification: 'that genre does not exist :('
         })
       } else {
-        console.log(res.data)
         let temp = [];
-        let titleList = []
-        let artistList = []
+        let titleList = [];
+        let artistList = [];
+        let song_idList = [];
         let titles = res.data.map(song => { //gets title data
           let title = song.title;
           titleList.push(title)
@@ -42,6 +54,11 @@ class Pickgenre extends Component {
           let artist = song.artist;
           artistList.push(artist)
           return artists; //remove warning
+        })
+        let song_id = res.data.map(song => { //gets song id
+          let id = song._id;
+          song_idList.push(id)
+          return song_id; //remove warning
         })
         let songList = res.data.map(song => {
           let url = song.link;
@@ -59,6 +76,7 @@ class Pickgenre extends Component {
         this.setState({ 
           title: titleList,
           artist: artistList,
+          song_id: song_idList,
           queue: temp,
           index: queueLength,
           display: 'flex',
@@ -71,23 +89,48 @@ class Pickgenre extends Component {
   // incriments current index in playlist +1
   playPrev = (event) => {
     if (this.state.index <= 0){
-      this.setState({index: this.state.queue.length-1})
+      this.setState({
+        index: this.state.queue.length-1,
+        notification: "",
+      })
     } else (
       this.setState({
-        index: this.state.index - 1
+        index: this.state.index - 1,
+        notification: "",
       })
     ) 
   }
-// incriments current index in playlist -1
+  // incriments current index in playlist -1
   playNext = (event) => {
     if (this.state.index >= this.state.queue.length-1){
-      this.setState({index: 0})
+      this.setState({
+        index: 0,
+        notification: "",
+      })
     } else (
       this.setState({
-        index: this.state.index + 1
+        index: this.state.index + 1,
+        notification: ""
       })
     )
   }
+
+  saveSong = (event) => {
+    if (localStorage.getItem("userId") != null) {
+      userModel.saveSong(this.state.userId, this.state.song_id[this.state.index]).then(res => {
+        this.setState({
+          notification: "saved successfully!"
+        })
+      }).catch(error => {
+        this.setState({
+            notification: `${error}, something went wrong!`
+        })
+      });
+    } else {
+      return this.props.history.push('/login');
+    }
+  }
+
   render() {
     const opts = {
       height: '720',

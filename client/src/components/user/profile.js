@@ -13,6 +13,7 @@ class Profile extends Component {
     artist: [],
     queue: [],
     index: null,
+    display: 'none',
   }
 
   componentDidMount(){
@@ -39,6 +40,11 @@ class Profile extends Component {
   })
 
   Model.getPlaylist(userId).then(res => {
+    if (res.data.songs.length === 0 ) {
+      this.setState({
+        display: 'block',
+      })
+    }
     let temp = [];
     let titleList = []
     let artistList = []
@@ -71,6 +77,10 @@ class Profile extends Component {
       artist: artistList,
       queue: temp,
       index: queueLength, 
+    })
+  }).catch(error => {
+    this.setState({
+        notification: `${error}, something went wrong!`
     })
   });
   }// end of component did mount
@@ -163,6 +173,7 @@ class Profile extends Component {
           <p>Welcome back <strong>{this.state.email}</strong></p>
           <p>member since: {this.state.join_date}</p>
         </div>
+        <h1 style={{display: this.state.display, textAlign: "center" }}>Add songs to your playlist!</h1>
         <YouTube id="profilePlayer"
         videoId={this.state.queue[this.state.index]}
         opts={opts}
