@@ -29,6 +29,15 @@ class userModels {
         let request = axios.get(`http://localhost:4000/api/users/${userId}/playlist/`)
         return request
     }
+
+    static saveSong(userId, song_id){
+        let request = axios.post(`http://localhost:4000/api/users/${userId}/playlist/`,
+            {
+                _id: song_id,
+            }
+        )
+        return request
+    }
 }
 
 

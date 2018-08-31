@@ -163,7 +163,7 @@ class Profile extends Component {
           <p>Welcome back <strong>{this.state.email}</strong></p>
           <p>member since: {this.state.join_date}</p>
         </div>
-        <YouTube
+        <YouTube id="profilePlayer"
         videoId={this.state.queue[this.state.index]}
         opts={opts}
         onEnd={this.playNext}

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import YouTube from 'react-youtube';
 import { NavLink } from "react-router-dom";
 import Model from "../models/getPlaylist.js";
+import userModel from "../models/userModels.js";
 
 class Home extends Component {
 
@@ -10,15 +11,18 @@ class Home extends Component {
     userId: null,
     title: [],
     artist: [],
+    song_id: [],
     queue: [],
     index: null,
+    notification: '',
   }
 //onMount, gets playlist from backend and splices the urls
   componentDidMount() {
     Model.getPlaylist().then(res => {
       let temp = [];
-      let titleList = []
-      let artistList = []
+      let titleList = [];
+      let artistList = [];
+      let song_idList = [];
       let titles = res.data.map(song => { //gets title data
         let title = song.title;
         titleList.push(title)
@@ -28,6 +32,11 @@ class Home extends Component {
         let artist = song.artist;
         artistList.push(artist)
         return artists; //remove warning
+      })
+      let song_id = res.data.map(song => { //gets song id
+        let id = song._id;
+        song_idList.push(id)
+        return song_id; //remove warning
       })
       let songList = res.data.map(song => { //split url to put in iframe
         let url = song.link;
@@ -46,6 +55,7 @@ class Home extends Component {
       this.setState({
         title: titleList,
         artist: artistList,
+        song_id: song_idList,
         queue: temp,
         index: queueLength, 
       })
@@ -60,27 +70,43 @@ class Home extends Component {
 // incriments current index in playlist +1
   playPrev = (event) => {
     if (this.state.index <= 0){
-      this.setState({index: this.state.queue.length-1})
+      this.setState({
+        index: this.state.queue.length-1,
+        notification: "",
+      })
     } else (
       this.setState({
-        index: this.state.index - 1
+        index: this.state.index - 1,
+        notification: "",
       })
     ) 
   }
 // incriments current index in playlist -1
   playNext = (event) => {
     if (this.state.index >= this.state.queue.length-1){
-      this.setState({index: 0})
+      this.setState({
+        index: 0,
+        notification: "",
+      })
     } else (
       this.setState({
-        index: this.state.index + 1
+        index: this.state.index + 1,
+        notification: ""
       })
     )
   }
 
   saveSong = (event) => {
     if (localStorage.getItem("userId") != null) {
-      
+      userModel.saveSong(this.state.userId, this.state.song_id[this.state.index]).then(res => {
+        this.setState({
+          notification: "saved successfully!"
+        })
+      }).catch(error => {
+        this.setState({
+            notification: `${error}, something went wrong!`
+        })
+      });
     } else {
       return this.props.history.push('/login');
     }
@@ -133,7 +159,8 @@ class Home extends Component {
           </button>
         </nav>
         <div id="songDetail">
-            <i className="fas fa-save" onClick={this.saveSong} title="save song" style={{cursor: "pointer"}}></i>
+          <p>{this.state.notification}</p>
+          <i className="fas fa-save" onClick={this.saveSong} title="save song" style={{cursor: "pointer"}}></i>
           <p>{this.state.title[this.state.index]}</p>
           <p>{this.state.artist[this.state.index]}</p>
         </div>
