@@ -161,7 +161,9 @@ class Pickgenre extends Component {
           <label>{this.state.notification}</label>
         </form>
         <div id="songDetail" style={{display: this.state.displayBlock}}>
-            <i className="fas fa-save" onClick={this.saveSong} title="save song" style={{cursor: "pointer"}}></i>
+          <button style={{margin: "0"}}>
+            <i className="fas fa-save" onClick={this.saveSong} title="save song"></i>
+          </button>
           <p>{this.state.title[this.state.index]}</p>
           <p>{this.state.artist[this.state.index]}</p>
         </div>

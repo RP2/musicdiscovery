@@ -160,7 +160,9 @@ class Home extends Component {
         </nav>
         <div id="songDetail">
           <p>{this.state.notification}</p>
-          <i className="fas fa-save" onClick={this.saveSong} title="save song" style={{cursor: "pointer"}}></i>
+          <button style={{margin: "0"}}>
+          <i className="fas fa-save" onClick={this.saveSong} title="save song"></i>
+          </button>
           <p>{this.state.title[this.state.index]}</p>
           <p>{this.state.artist[this.state.index]}</p>
         </div>
