@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
+import YouTube from 'react-youtube';
 import Model from "../../models/userModels";
 
 class Profile extends Component {
@@ -8,6 +9,10 @@ class Profile extends Component {
     email: '',
     join_date: '',
     clearance: false,
+    title: [],
+    artist: [],
+    queue: [],
+    index: null,
   }
 
   componentDidMount(){
@@ -32,7 +37,63 @@ class Profile extends Component {
       clearance: res.data.clearance,
     })
   })
-  
+
+  Model.getPlaylist(userId).then(res => {
+    let temp = [];
+    let titleList = []
+    let artistList = []
+    let titles = res.data.songs.map(song => { //gets title data
+      let title = song.title;
+      titleList.push(title)
+      return titles; //remove warning
+    })
+    let artists = res.data.songs.map(song => { //gets artist data
+      let artist = song.artist;
+      artistList.push(artist)
+      return artists; //remove warning
+    })
+    let songList = res.data.songs.map(song => { //split url to put in iframe
+      let url = song.link;
+      let urlSections = url.split('/');
+      let urlEnd = urlSections[urlSections.length -1];
+      let equalElement = urlEnd.includes('=')
+      if (equalElement) {
+        let equallink = urlEnd.split('=')
+        let link = equallink[equallink.length -1];
+        temp.push(link);
+      } else {temp.push(urlEnd);}
+      return songList; //remove warnings
+    })
+    //randomly sets initial song, change number based on number of songs
+    let queueLength = Math.floor(Math.random() * temp.length)
+    this.setState({
+      title: titleList,
+      artist: artistList,
+      queue: temp,
+      index: queueLength, 
+    })
+  });
+  }// end of component did mount
+
+  // incriments current index in playlist +1
+  playPrev = (event) => {
+    if (this.state.index <= 0){
+      this.setState({index: this.state.queue.length-1})
+    } else (
+      this.setState({
+        index: this.state.index - 1
+      })
+    ) 
+  }
+// incriments current index in playlist -1
+  playNext = (event) => {
+    if (this.state.index >= this.state.queue.length-1){
+      this.setState({index: 0})
+    } else (
+      this.setState({
+        index: this.state.index + 1
+      })
+    )
   }
 
   logout = () => {
@@ -54,6 +115,19 @@ class Profile extends Component {
   }
 
   render() {
+    const opts = {
+      height: '720',
+      width: '1280',
+      playerVars: {
+        autoplay: 1,
+        wmode:"opaque",
+        rel: 0,
+        controls: 0,
+        showinfo: 0,
+        frameBorder: 0,
+        allow: "autoplay",
+      }
+    };
     return (
       <div className="Login">
         <nav>
@@ -74,9 +148,26 @@ class Profile extends Component {
             </NavLink>
           </button>
           ):('')}
+          <button className="homeButton" onClick={this.playPrev}>
+            <i className="fas fa-backward"></i>
+          </button>
+          <button className="homeButton" onClick={this.playNext}>
+            <i className="fas fa-forward"></i>
+          </button>
+        </nav>
+        <div id="songDetail">
+          <p>{this.state.title[this.state.index]}</p>
+          <p>{this.state.artist[this.state.index]}</p>
+        </div>
+        <div id="userDetail">
           <p>Welcome back <strong>{this.state.email}</strong></p>
           <p>member since: {this.state.join_date}</p>
-        </nav>
+        </div>
+        <YouTube
+        videoId={this.state.queue[this.state.index]}
+        opts={opts}
+        onEnd={this.playNext}
+      />
       </div>
     );
   }

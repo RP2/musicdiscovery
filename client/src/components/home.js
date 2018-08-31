@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import YouTube from 'react-youtube';
 import { NavLink } from "react-router-dom";
 import Model from "../models/getPlaylist.js";
 
@@ -84,8 +85,22 @@ class Home extends Component {
       return this.props.history.push('/login');
     }
   }
+  
 
   render() {
+    const opts = {
+      height: '720',
+      width: '1280',
+      playerVars: {
+        autoplay: 1,
+        wmode:"opaque",
+        rel: 0,
+        controls: 0,
+        showinfo: 0,
+        frameBorder: 0,
+        allow: "autoplay",
+      }
+    };
     return (
       <div className="home">
         <nav>
@@ -122,8 +137,11 @@ class Home extends Component {
           <p>{this.state.title[this.state.index]}</p>
           <p>{this.state.artist[this.state.index]}</p>
         </div>
-        <iframe id="homePlayer" title="music" src={`https://www.youtube.com/embed/${this.state.queue[this.state.index]}?wmode=opaque&rel=0&amp;controls=0&amp;showinfo=0&amp;autoplay=1`} frameBorder="0" allow="autoplay; encrypted-media" allowFullScreen>
-        </iframe>
+        <YouTube
+        videoId={this.state.queue[this.state.index]}
+        opts={opts}
+        onEnd={this.playNext}
+      />
       </div>
     );
   }

@@ -24,6 +24,11 @@ class userModels {
         let request = axios.get(`http://localhost:4000/api/users/${userId}`)
         return request
     }
+
+    static getPlaylist(userId){
+        let request = axios.get(`http://localhost:4000/api/users/${userId}/playlist/`)
+        return request
+    }
 }
 
 
