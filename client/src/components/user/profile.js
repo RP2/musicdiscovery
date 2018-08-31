@@ -133,26 +133,26 @@ class Profile extends Component {
         <nav>
           <button className="homeButton">
             <NavLink to="/">
-                <i className="fas fa-home"></i>
+                <i className="fas fa-home" title="go home"></i>
             </NavLink>
           </button>
           <button className="homeButton">
             <NavLink to="/">
-              <i className="fas fa-sign-out-alt" onClick={this.logout}></i>
+              <i className="fas fa-sign-out-alt" title="logout" onClick={this.logout}></i>
             </NavLink>
           </button>
           {this.state.clearance ?(
             <button className="homeButton">
             <NavLink to="/admin">
-            <i className="fas fa-check"></i>
+            <i className="fas fa-check" title="aprove"></i>
             </NavLink>
           </button>
           ):('')}
           <button className="homeButton" onClick={this.playPrev}>
-            <i className="fas fa-backward"></i>
+            <i className="fas fa-backward" title="play previous song"></i>
           </button>
           <button className="homeButton" onClick={this.playNext}>
-            <i className="fas fa-forward"></i>
+            <i className="fas fa-forward" title="play next song"></i>
           </button>
         </nav>
         <div id="songDetail">

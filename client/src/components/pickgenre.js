@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { NavLink } from "react-router-dom";
+import YouTube from 'react-youtube';
 import Model from "../models/filterSongs.js";
 
 class Pickgenre extends Component {
@@ -7,7 +8,10 @@ class Pickgenre extends Component {
   state = {
     queue: [],
     index: null,
+    title: [],
+    artist: [],
     display: 'none',
+    displayBlock: 'none',
     notification: '',
   }
 
@@ -27,6 +31,18 @@ class Pickgenre extends Component {
       } else {
         console.log(res.data)
         let temp = [];
+        let titleList = []
+        let artistList = []
+        let titles = res.data.map(song => { //gets title data
+          let title = song.title;
+          titleList.push(title)
+          return titles; //remove warning
+        })
+        let artists = res.data.map(song => { //gets artist data
+          let artist = song.artist;
+          artistList.push(artist)
+          return artists; //remove warning
+        })
         let songList = res.data.map(song => {
           let url = song.link;
           let urlSections = url.split('/');
@@ -41,9 +57,12 @@ class Pickgenre extends Component {
         })
         let queueLength = Math.floor(Math.random() * temp.length)
         this.setState({ 
+          title: titleList,
+          artist: artistList,
           queue: temp,
           index: queueLength,
           display: 'flex',
+          displayBlock: 'block',
           notification: '',
         })
       }
@@ -70,12 +89,25 @@ class Pickgenre extends Component {
     )
   }
   render() {
+    const opts = {
+      height: '720',
+      width: '1280',
+      playerVars: {
+        autoplay: 1,
+        wmode:"opaque",
+        rel: 0,
+        controls: 0,
+        showinfo: 0,
+        frameBorder: 0,
+        allow: "autoplay",
+      }
+    };
     return (
       <div className="pickgenre">
         <nav>
           <button className="homeButton">
               <NavLink to="/">
-              <i className="fas fa-home"></i>
+              <i className="fas fa-home" title="go home"></i>
               </NavLink>
           </button>
         </nav>
@@ -85,16 +117,25 @@ class Pickgenre extends Component {
           <input type="submit" value="Submit" style={{display: 'none'}}/>
           <label>{this.state.notification}</label>
         </form>
+        <div id="songDetail" style={{display: this.state.displayBlock}}>
+            <i className="fas fa-save" onClick={this.saveSong} title="save song" style={{cursor: "pointer"}}></i>
+          <p>{this.state.title[this.state.index]}</p>
+          <p>{this.state.artist[this.state.index]}</p>
+        </div>
         <div id="genreDiv" style={{display: this.state.display}}>
-          <iframe id="genrePlayer" title="music" src={`https://www.youtube.com/embed/${this.state.queue[this.state.index]}?wmode=opaque&rel=0&amp;controls=0&amp;showinfo=0&amp;autoplay=1`} frameBorder="0" allow="autoplay; encrypted-media" allowFullScreen>
-          </iframe>
+          <YouTube
+          id="genrePlayer"
+            videoId={this.state.queue[this.state.index]}
+            opts={opts}
+            onEnd={this.playNext}
+          />
         </div>
         <div id="genreButtons" style={{display: this.state.display}}>
           <button className="homeButton" onClick={this.playPrev}>
-            <i className="fas fa-backward"></i>
+            <i className="fas fa-backward" title="play previous song"></i>
           </button>
           <button className="homeButton" onClick={this.playNext}>
-            <i className="fas fa-forward"></i>
+            <i className="fas fa-forward" title="play next song"></i>
           </button>
         </div>
       </div>

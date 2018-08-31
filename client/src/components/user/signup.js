@@ -46,7 +46,7 @@ class Signup extends Component {
         <nav>
           <button className="homeButton">
             <NavLink to="/">
-                <i className="fas fa-home"></i>
+                <i className="fas fa-home" title="go home"></i>
             </NavLink>
           </button>
         </nav>

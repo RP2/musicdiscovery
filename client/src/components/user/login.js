@@ -34,12 +34,12 @@ class Login extends Component {
         <nav>
           <button className="homeButton">
             <NavLink to="/">
-                <i className="fas fa-home"></i>
+                <i className="fas fa-home" title="go home"></i>
             </NavLink>
           </button>
           <button id="signup">
             <NavLink to="/signup">
-                <i className="fas fa-user-plus"></i>
+                <i className="fas fa-user-plus" title="signup"></i>
             </NavLink>
           </button>
         </nav>

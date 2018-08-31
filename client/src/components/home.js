@@ -106,38 +106,39 @@ class Home extends Component {
         <nav>
           <button className="homeButton" id="pickgenre">
               <NavLink to="/pickgenre">
-              <i className="fas fa-filter"></i>
+              <i className="fas fa-filter" title="genre filter"></i>
               </NavLink>
           </button>
           <button className="homeButton" id="addsong">
               <NavLink to="/addsong">
-              <i className="fas fa-plus"></i>
+              <i className="fas fa-plus" title="request a song"></i>
               </NavLink>
           </button>
           <button className="homeButton" onClick={this.playPrev}>
-          <i className="fas fa-backward"></i>
+          <i className="fas fa-backward" title="play previous song"></i>
           </button>
           <button className="homeButton" onClick={this.playNext}>
-          <i className="fas fa-forward"></i>
+          <i className="fas fa-forward" title="play next song"></i>
           </button>
           <button className="homeButton" id="addsong">
             {this.state.auth ? (
               <NavLink to="/profile">
-                <i className="fas fa-user"></i>
+                <i className="fas fa-user" title="profile"></i>
               </NavLink>
             ) : (
               <NavLink to="/login">
-                <i className="fas fa-user"></i>
+                <i className="fas fa-user" title="login"></i>
               </NavLink>
             )}
           </button>
         </nav>
         <div id="songDetail">
-            <i className="fas fa-save" onClick={this.saveSong}></i>
+            <i className="fas fa-save" onClick={this.saveSong} title="save song" style={{cursor: "pointer"}}></i>
           <p>{this.state.title[this.state.index]}</p>
           <p>{this.state.artist[this.state.index]}</p>
         </div>
         <YouTube
+        id="homePlayer"
         videoId={this.state.queue[this.state.index]}
         opts={opts}
         onEnd={this.playNext}
