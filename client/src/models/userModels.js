@@ -38,6 +38,12 @@ class userModels {
         )
         return request
     }
+
+    static pending(){
+        let request = axios.get("http://localhost:4000/api/songs/pending",
+        )
+        return request
+    }
 }
 
 

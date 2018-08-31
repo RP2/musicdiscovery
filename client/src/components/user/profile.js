@@ -25,8 +25,7 @@ class Profile extends Component {
       userId = localStorage.getItem("userId");
     }
   Model.profile(userId).then(res => {
-    if (res.data != null) {
-    } else if (res.data === null) {
+    if (res.data === null) {
       if (localStorage.getItem("userId") != null) {
         localStorage.removeItem("userId");
       }

@@ -22,6 +22,15 @@ i {
   text-shadow: 0px 0px 1px black;
 }
 
+ul {
+  list-style-type: none;
+  -webkit-margin-before: 0em;
+  -webkit-margin-after: 0em;
+  -webkit-margin-start: 0px;
+  -webkit-margin-end: 0px;
+  -webkit-padding-start: 0px;
+}
+
 button :hover {
   color: #fdfdfd;
 }
@@ -111,5 +120,10 @@ button {
   color: #e4e4e4;
   outline: 0;
   background-color: transparent;
+}
+
+#adminPending {
+  position: absolute;
+  margin: 10em;
 }
 
