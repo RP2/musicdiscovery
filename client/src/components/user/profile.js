@@ -14,6 +14,7 @@ class Profile extends Component {
     queue: [],
     index: null,
     display: 'none',
+    notification:  "Add songs to your playlist!",
   }
 
   componentDidMount(){
@@ -44,7 +45,7 @@ class Profile extends Component {
       this.setState({
         display: 'block',
       })
-    }
+    } 
     let temp = [];
     let titleList = []
     let artistList = []
@@ -80,7 +81,8 @@ class Profile extends Component {
     })
   }).catch(error => {
     this.setState({
-        notification: `${error}, something went wrong!`
+        notification: `${error}, something went wrong!`,
+        display: "block",
     })
   });
   }// end of component did mount
@@ -173,7 +175,7 @@ class Profile extends Component {
           <p>Welcome back <strong>{this.state.email}</strong></p>
           <p>member since: {this.state.join_date}</p>
         </div>
-        <h1 style={{display: this.state.display, textAlign: "center" }}>Add songs to your playlist!</h1>
+        <p id="profile_error" style={{display: this.state.display}}>{this.state.notification}</p>
         <YouTube id="profilePlayer"
         videoId={this.state.queue[this.state.index]}
         opts={opts}

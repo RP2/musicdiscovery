@@ -32,7 +32,7 @@ i {
   display: flex;
   flex-direction: row;
 }
-#songDetail {
+#songDetail, #profile_error {
   position: absolute;
   bottom: 0;
   left: 0;
