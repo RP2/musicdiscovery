@@ -44,6 +44,22 @@ class userModels {
         )
         return request
     }
+
+    static approve(song_id){
+        console.log(song_id)
+        let request = axios.put(`http://localhost:4000/api/songs/pending/${song_id}`,
+        {
+            status: true,
+        }
+    )
+        return request
+    }
+
+    static delete(song_id){
+        console.log(song_id)
+        let request = axios.delete(`http://localhost:4000/api/songs/pending/${song_id}`)
+        return request
+    }
 }
 
 

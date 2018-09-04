@@ -123,7 +123,21 @@ button {
 }
 
 #adminPending {
-  position: absolute;
-  margin: 10em;
+  max-height: 100vh;
+}
+
+#pendingList {
+  display: flex;
+  justify-content: center;
+}
+
+#pendingList ul {
+  overflow-y: auto;
+  max-height: 10em;
+}
+
+
+#adminButton{
+  justify-content: center;
 }
 

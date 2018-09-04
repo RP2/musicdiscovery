@@ -125,6 +125,7 @@ class Home extends Component {
         showinfo: 0,
         frameBorder: 0,
         allow: "autoplay",
+        iv_load_policy: 3,
       }
     };
     return (

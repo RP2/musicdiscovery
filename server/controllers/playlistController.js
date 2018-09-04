@@ -82,19 +82,20 @@ const pending = (req, res) => {
 };
 //aprove song status
 const approve = (req, res) => {
-    db.song.findByIdAndUpdate({song: req.params.song_id}, (err, updateStatus) => {
+    console.log(req.params.song_id)
+    db.song.findByIdAndUpdate({_id: req.params.song_id}, req.body, {new:true}, (err, updateStatus) => {
         if (err){
             console.log("update song status error", err);
         }
-        updateStatus.status = req.body.status;
-        updateStatus.save = (err, savedStatus) =>{
-            res.status(200).json(savedStatus);
-        }
+        // updateStatus.status = true;
+        // updateStatus.save = (err, savedStatus) =>{
+            res.status(200).json(updateStatus);
+        // }
     });
 };
 //delete songs
 const destroy = (req, res) => {
-    db.song.findByIdAndRemove({song: req.params.song_id}, (err, deleteSong) => {
+    db.song.findByIdAndRemove({_id: req.params.song_id}, (err, deleteSong) => {
         if (err){
             console.log("delete song error", err);
         }

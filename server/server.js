@@ -22,8 +22,8 @@ app.get("/api/playlist/:playlist_id", controllers.playlist.show);
 app.get("/api/songs", controllers.playlist.songindex);
 //admin routes
 app.get("/api/songs/pending", controllers.playlist.pending);
-app.put("/api/playlist/pending/:song_id", controllers.playlist.approve);
-app.delete("/api/playlist/pending/:song_id", controllers.playlist.destroy);
+app.put("/api/songs/pending/:song_id", controllers.playlist.approve);
+app.delete("/api/songs/pending/:song_id", controllers.playlist.destroy);
 //user account routes
 app.get("/api/users", controllers.user.index)
 app.post("/api/users/login", controllers.user.login);
