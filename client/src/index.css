@@ -141,3 +141,32 @@ button {
   justify-content: center;
 }
 
+#aboutDiv {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+#aboutContent{
+  max-width: 50vw;
+}
+#aboutContent ul {
+  list-style-type: square;
+}
+
+#aboutContent p {
+  text-indent: 1em;
+}
+
+#tut {
+  position: absolute;
+  background-color: black;
+  padding-left: 20vw;
+  padding-right: 20vw;
+  padding-top: 10vh;
+  padding-bottom: 10vh;
+  margin-top: 20vh;
+  margin-bottom: 20vh;
+}

@@ -7,6 +7,7 @@ import login from "./user/login.js";
 import signup from "./user/signup.js";
 import profile from "./user/profile.js";
 import admin from "./user/admin.js";
+import about from "./about.js";
 
 class Routes extends Component {
   render() {
@@ -19,6 +20,7 @@ class Routes extends Component {
             <Route path="/signup" component={signup} />
             <Route path="/profile" component={profile} />
             <Route path="/admin" component={admin} />
+            <Route path="/about" component={about} />
             <Route exact path="/" component={home} />
             <Route exact path="/*" render={() => <div><h1>Error 404, that page does not exist</h1></div>} />
             </Switch>

@@ -99,7 +99,7 @@ class Admin extends Component {
 
   render() {
     let renderPending = this.state.pending.map(song => {
-      return <li key={song.id}>{song.title}, {song.artist}, {song.link} : <button onClick={this.check} id={song.id} className={song.yt_id}>approve/delete</button></li>
+      return <li key={song.id}>{song.title}, {song.artist}, {song.link} : <button onClick={this.check} id={song.id} className={song.yt_id}>preview</button></li>
     }) 
     const opts = {
       height: '720',

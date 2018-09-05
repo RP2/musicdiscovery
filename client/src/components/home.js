@@ -15,9 +15,28 @@ class Home extends Component {
     queue: [],
     index: null,
     notification: '',
+    viewTut: "none",
+  }
+
+  hide = (event) => {
+    this.setState({
+      viewTut: "none"
+    })
   }
 //onMount, gets playlist from backend and splices the urls
   componentDidMount() {
+
+    if (localStorage.getItem("Visited") != null) {
+      this.setState({
+        viewTut: "none"
+      })
+    } else {
+      localStorage.setItem("Visited", true)
+      this.setState({
+        viewTut: "block"
+      })
+    }
+
     Model.getPlaylist().then(res => {
       let temp = [];
       let titleList = [];
@@ -130,6 +149,11 @@ class Home extends Component {
     };
     return (
       <div className="home">
+      <div id="tut" style={{display: this.state.viewTut}}>
+        <a><i className="fas fa-times" onClick={this.hide}></i></a>
+        <h1>Hello, welcome to Discover Music</h1>
+        <p>This is a global playlist made by many different people. Feel free to explore the site and if you get lost click the 'i' button at the top. We hope you find something new!</p>
+      </div>
         <nav>
           <button className="homeButton" id="pickgenre">
               <NavLink to="/pickgenre">
@@ -157,6 +181,11 @@ class Home extends Component {
                 <i className="fas fa-user" title="login"></i>
               </NavLink>
             )}
+          </button>
+          <button className="homeButton" id="about">
+              <NavLink to="/about">
+              <i className="fas fa-info" title="about"></i>
+              </NavLink>
           </button>
         </nav>
         <div id="songDetail">
