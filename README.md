@@ -35,3 +35,10 @@ The goal of the project was to build something that I would actually use. Since 
 
 [link to user stories, wireframes, and entity relationships](https://github.com/RP2/musicdiscovery/tree/master/Project%20Deliverables)
     
+
+
+### Future plans
+
+    1. regex form validation
+    2. redux
+    3. hash and salt passwords
