@@ -2,11 +2,15 @@
 
 ## Discover new artists by listening to our curated playlist
 ## Request a song so other users can discover something new
-## Make an account to save songs from our playlist to your personal playlist
+## Make an account to save songs from our playlist to yours
+
+The goal of the project was to build something that I would actually use. Since I like finding new artists I often spend a lot of time going through the related artists I already know. This however often takes a lot of time and I also have to know what I am looking for. With this project the aim is to eliminate this long search period and make it quick and easy to find new songs. Since the site's global playlist has songs from many different people, it is easy to find something new without needing to know what to look for.
+
+[link to live site](https://github.com/RP2/musicdiscovery)
 
 ### Technologies :
 
-    - 
+    - React, HTML5, CSS3, Javascript, Youtube API, MongoDB
 
 ### Dependencies :
 
@@ -25,4 +29,9 @@
     3. body-parser
     4. cors
 
+    - for front end installation, check the readme in the client folder then run npm install. 
+    - for local server setup, run npm install, run seed.js, then run server.js
+    - make sure to run both npm within each folder
+
+[link to user stories, wireframes, and entity relationships](https://github.com/RP2/musicdiscovery/tree/master/Project%20Deliverables)
     
