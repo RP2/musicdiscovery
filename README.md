@@ -6,7 +6,7 @@
 
 The goal of the project was to build something that I would actually use. Since I like finding new artists I often spend a lot of time going through the related artists I already know. This however often takes a lot of time and I also have to know what I am looking for. With this project the aim is to eliminate this long search period and make it quick and easy to find new songs. Since the site's global playlist has songs from many different people, it is easy to find something new without needing to know what to look for.
 
-[link to live site](https://github.com/RP2/musicdiscovery)
+[link to live site](https://ga-md.herokuapp.com/)
 
 ### Technologies :
 
