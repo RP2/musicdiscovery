@@ -31,7 +31,7 @@ class userModels {
     }
 
     static saveSong(userId, song_id){
-        let request = axios.post(`https://ga-md.herokuapp.com/api/users/${userId}/playlist/`,
+        let request = axios.post(`http://localhost:4000/api/users/${userId}/playlist/`,
             {
                 _id: song_id,
             }
@@ -40,14 +40,14 @@ class userModels {
     }
 
     static pending(){
-        let request = axios.get("https://ga-md.herokuapp.com/api/songs/pending",
+        let request = axios.get("http://localhost:4000/api/songs/pending",
         )
         return request
     }
 
     static approve(song_id){
         console.log(song_id)
-        let request = axios.put(`https://ga-md.herokuapp.com/api/songs/pending/${song_id}`,
+        let request = axios.put(`http://localhost:4000/api/songs/pending/${song_id}`,
         {
             status: true,
         }
@@ -57,7 +57,7 @@ class userModels {
 
     static delete(song_id){
         console.log(song_id)
-        let request = axios.delete(`https://ga-md.herokuapp.com/api/songs/pending/${song_id}`)
+        let request = axios.delete(`http://localhost:4000/api/songs/pending/${song_id}`)
         return request
     }
 }

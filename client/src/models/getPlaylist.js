@@ -2,7 +2,7 @@ import axios from "axios";
 
 class getPlaylist {
   static getPlaylist() {
-    let request = axios.get("https://ga-md.herokuapp.com/api/playlist/");
+    let request = axios.get("http://localhost:4000/api/playlist/");
     return request;
   }
 }
