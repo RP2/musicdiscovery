@@ -35,7 +35,7 @@ const filter = (req, res) => {
             }
             console.log(foundPlaylist)
             let songs = foundPlaylist.songs.filter(song => {
-                return song.genre === req.params.genre
+                return (song.genre === req.params.genre && song.status === true)
             })
             res.status(200).json(songs);
         })
