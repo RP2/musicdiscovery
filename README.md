@@ -28,6 +28,7 @@ The goal of the project was to build something that I would actually use. Since 
     2. mongoose
     3. body-parser
     4. cors
+    5. bcrypt
 
     - for front end installation, check the readme in the client folder then run npm install. 
     - for local server setup, run npm install, run seed.js, then run server.js
