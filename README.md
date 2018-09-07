@@ -42,4 +42,4 @@ The goal of the project was to build something that I would actually use. Since 
 
     1. regex form validation
     2. redux
-    3. hash and salt passwords
+    3. jwt tokens
