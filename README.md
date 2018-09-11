@@ -10,7 +10,7 @@ The goal of the project was to build something that I would actually use. Since 
 
 ### Technologies :
 
-    - React, HTML5, CSS3, Javascript, Youtube API, MongoDB
+    - React, HTML5, CSS3, Javascript, Youtube API, MongoDB, Express, Node
 
 ### Dependencies :
 
